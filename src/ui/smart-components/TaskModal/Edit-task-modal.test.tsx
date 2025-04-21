@@ -1,0 +1,87 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import React from 'react';
+
+import useIssueById from '../../../domains/issues/hooks/use-issue-by-id';
+import useUpdateIssue from '../../../domains/issues/hooks/use-update-issue';
+import useUsers from '../../../domains/users/hooks/useUsers';
+import EditTaskModal from './Edit-task-modal';
+
+jest.mock('../../../domains/issues/hooks/useIssueById');
+jest.mock('../../../domains/issues/hooks/useUpdateIssue');
+jest.mock('../../../domains/users/hooks/useUsers');
+
+describe('EditTaskModal', () => {
+  const queryClient = new QueryClient();
+  const mockTask = {
+    id: 1,
+    title: 'Task 1',
+    description: 'Description 1',
+    priority: 'High',
+    status: 'InProgress',
+    assignee: { id: 1, fullName: 'John Doe' }
+  };
+
+  const mockUsers = [
+    { id: 1, fullName: 'John Doe' },
+    { id: 2, fullName: 'Jane Smith' }
+  ];
+
+  const mockUpdateIssue = jest.fn();
+
+  beforeEach(() => {
+    (useIssueById as jest.Mock).mockReturnValue({
+      data: mockTask,
+      isLoading: false
+    });
+    (useUsers as jest.Mock).mockReturnValue({
+      data: mockUsers,
+      isLoading: false
+    });
+    (useUpdateIssue as jest.Mock).mockReturnValue({
+      mutate: mockUpdateIssue
+    });
+  });
+
+  const renderEditTaskModal = (taskId: number | null = 1) => {
+    return render(
+      <QueryClientProvider client={queryClient}>
+        <EditTaskModal open onClose={() => {}} taskId={taskId} />
+      </QueryClientProvider>
+    );
+  };
+
+  it('should load task data', async () => {
+    renderEditTaskModal();
+
+    await waitFor(() => {
+      expect(screen.getByLabelText(/название/i)).toHaveValue('Task 1');
+      expect(screen.getByLabelText(/описание/i)).toHaveValue('Description 1');
+    });
+  });
+
+  it('should submit form correctly', async () => {
+    renderEditTaskModal();
+
+    fireEvent.change(screen.getByLabelText(/название/i), { target: { value: 'Updated Task' } });
+    fireEvent.click(screen.getByText('Сохранить'));
+
+    await waitFor(() => {
+      expect(mockUpdateIssue).toHaveBeenCalledWith(
+        expect.objectContaining({ title: 'Updated Task' }),
+        expect.any(Object)
+      );
+    });
+  });
+
+  it('should show error for empty title', async () => {
+    renderEditTaskModal();
+
+    fireEvent.change(screen.getByLabelText(/название/i), { target: { value: '' } });
+    fireEvent.click(screen.getByText('Сохранить'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Название задачи обязательно')).toBeInTheDocument();
+    });
+  });
+});

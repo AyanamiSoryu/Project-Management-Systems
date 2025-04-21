@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "target": "ES2020",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "types": ["jest", "@testing-library/jest-dom", "node"],
+    "baseUrl": ".",
+    "noUnusedLocals": false,
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "display": "Recommended",
+  "include": [
+    "src",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "jest.setup.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "server",
+    "coverage"
+  ]
+}
