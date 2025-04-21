@@ -41,5 +41,10 @@ beforeAll(() => {
 });
 
 afterAll(() => {
-  console.error = originalError;
+  jest.clearAllTimers();
+  jest.useRealTimers();
+});
+
+beforeEach(() => {
+  jest.clearAllMocks();
 });

@@ -24,7 +24,7 @@ import { useIssueByIdFromAllIssues } from '../../../domains/issues/hooks/use-iss
 import useUpdateIssue from '../../../domains/issues/hooks/use-update-issue';
 import { Priority } from '../../../domains/issues/models/prority';
 import { Status } from '../../../domains/issues/models/status';
-import useUsers from '../../../domains/users/hooks/useUsers';
+import useUsers from '../../../domains/users/hooks/use-users';
 
 type EditTaskModalProps = {
   open: boolean;

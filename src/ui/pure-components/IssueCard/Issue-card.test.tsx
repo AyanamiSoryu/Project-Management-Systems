@@ -6,7 +6,7 @@ import { Priority } from '../../../domains/issues/models/prority';
 import { Status } from '../../../domains/issues/models/status';
 import IssueCard from './Issue-card';
 
-jest.mock('../TaskModal/EditTaskModal', () => ({
+jest.mock('../../smart-components/TaskModal/Edit-task-modal', () => ({
   __esModule: true,
   default: ({ open }: { open: boolean; onClose: () => void }) =>
     open ? <div data-testid='edit-modal'>Edit Modal</div> : null

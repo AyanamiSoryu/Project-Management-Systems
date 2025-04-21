@@ -14,10 +14,10 @@ import React, { useState } from 'react';
 
 import useBoards from '../../../domains/boards/hooks/use-boards';
 import useCreateIssue from '../../../domains/issues/hooks/use-create-issue';
-import useUpdateIssueStatus from '../../../domains/issues/hooks/use-update-isuue-status';
+import useUpdateIssueStatus from '../../../domains/issues/hooks/use-update-issue-status';
 import { Priority } from '../../../domains/issues/models/prority';
 import { Status } from '../../../domains/issues/models/status';
-import useUsers from '../../../domains/users/hooks/useUsers';
+import useUsers from '../../../domains/users/hooks/use-users';
 
 type TaskModalProps = {
   open: boolean;

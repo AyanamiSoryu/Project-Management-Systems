@@ -7,8 +7,8 @@ import { useBoard } from '../../../domains/boards/hooks/use-board';
 import useBoardTasks from '../../../domains/boards/hooks/use-board-tasks';
 import BoardPage from './Board-page';
 
-jest.mock('../../../domains/boards/hooks/useBoard');
-jest.mock('../../../domains/boards/hooks/useBoardTasks');
+jest.mock('../../../domains/boards/hooks/use-board');
+jest.mock('../../../domains/boards/hooks/use-board-tasks');
 
 describe('BoardPage', () => {
   const queryClient = new QueryClient({

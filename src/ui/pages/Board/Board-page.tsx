@@ -7,7 +7,7 @@ import { useBoard } from '../../../domains/boards/hooks/use-board';
 import useBoardTasks from '../../../domains/boards/hooks/use-board-tasks';
 import { useBoardsQueryKey } from '../../../domains/boards/hooks/use-boards';
 import { TaskOnBoard } from '../../../domains/boards/models/task-on-board';
-import useUpdateIssueStatus from '../../../domains/issues/hooks/use-update-isuue-status';
+import useUpdateIssueStatus from '../../../domains/issues/hooks/use-update-issue-status';
 import { Status } from '../../../domains/issues/models/status';
 import BoardColumns from '../../pure-components/Board/Board-columns';
 import BoardHeader from '../../pure-components/Board/Board-header';

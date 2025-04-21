@@ -7,7 +7,7 @@ import { Priority } from '../../../domains/issues/models/prority';
 import { Status } from '../../../domains/issues/models/status';
 import Issues from './Issues';
 
-jest.mock('../../../domains/issues/hooks/useIssue');
+jest.mock('../../../domains/issues/hooks/use-issue');
 
 describe('Issues', () => {
   const queryClient = new QueryClient();

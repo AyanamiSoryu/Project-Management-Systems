@@ -1,18 +1,24 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 
 import useIssueById from '../../../domains/issues/hooks/use-issue-by-id';
 import useUpdateIssue from '../../../domains/issues/hooks/use-update-issue';
-import useUsers from '../../../domains/users/hooks/useUsers';
+import useUsers from '../../../domains/users/hooks/use-users';
+import { render } from '../../../test-utils';
 import EditTaskModal from './Edit-task-modal';
 
-jest.mock('../../../domains/issues/hooks/useIssueById');
-jest.mock('../../../domains/issues/hooks/useUpdateIssue');
-jest.mock('../../../domains/users/hooks/useUsers');
+jest.mock('../../../domains/issues/hooks/use-issue-by-id');
+jest.mock('../../../domains/issues/hooks/use-update-issue');
+jest.mock('../../../domains/users/hooks/use-users');
+
+// Also mock useNavigate directly
+const mockNavigate = jest.fn();
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockNavigate
+}));
 
 describe('EditTaskModal', () => {
-  const queryClient = new QueryClient();
   const mockTask = {
     id: 1,
     title: 'Task 1',
@@ -41,14 +47,11 @@ describe('EditTaskModal', () => {
     (useUpdateIssue as jest.Mock).mockReturnValue({
       mutate: mockUpdateIssue
     });
+    jest.clearAllMocks();
   });
 
   const renderEditTaskModal = (taskId: number | null = 1) => {
-    return render(
-      <QueryClientProvider client={queryClient}>
-        <EditTaskModal open onClose={() => {}} taskId={taskId} />
-      </QueryClientProvider>
-    );
+    return render(<EditTaskModal open onClose={() => {}} taskId={taskId} />);
   };
 
   it('should load task data', async () => {

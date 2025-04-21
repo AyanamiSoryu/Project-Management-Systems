@@ -4,12 +4,12 @@ import React from 'react';
 
 import useBoards from '../../../domains/boards/hooks/use-boards';
 import useCreateIssue from '../../../domains/issues/hooks/use-create-issue';
-import useUsers from '../../../domains/users/hooks/useUsers';
+import useUsers from '../../../domains/users/hooks/use-users';
 import TaskModal from './Task-modal';
 
-jest.mock('../../../domains/boards/hooks/useBoards');
-jest.mock('../../../domains/users/hooks/useUsers');
-jest.mock('../../../domains/issues/hooks/useCreateIssue');
+jest.mock('../../../domains/boards/hooks/use-boards');
+jest.mock('../../../domains/users/hooks/use-users');
+jest.mock('../../../domains/issues/hooks/use-create-issue');
 
 describe('TaskModal', () => {
   const queryClient = new QueryClient();

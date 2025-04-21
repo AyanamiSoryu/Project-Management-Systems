@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import useBoards from '../../../domains/boards/hooks/use-boards';
 import BoardsPage from './Boards';
 
-jest.mock('../../../domains/boards/hooks/useBoards');
+jest.mock('../../../domains/boards/hooks/use-boards');
 const mockedUseNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),

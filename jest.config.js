@@ -1,4 +1,7 @@
 module.exports = {
+  testTimeout: 10000,
+  detectOpenHandles: true,
+  forceExit: true,
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],

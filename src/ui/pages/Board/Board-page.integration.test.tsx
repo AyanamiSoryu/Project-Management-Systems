@@ -5,12 +5,12 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import { useBoard } from '../../../domains/boards/hooks/use-board';
 import useBoardTasks from '../../../domains/boards/hooks/use-board-tasks';
-import useUpdateIssueStatus from '../../../domains/issues/hooks/use-update-isuue-status';
+import useUpdateIssueStatus from '../../../domains/issues/hooks/use-update-issue-status';
 import BoardPage from './Board-page';
 
-jest.mock('../../../domains/boards/hooks/useBoard');
-jest.mock('../../../domains/boards/hooks/useBoardTasks');
-jest.mock('../../../domains/issues/hooks/useUpdateIsuueStatus');
+jest.mock('../../../domains/boards/hooks/use-board');
+jest.mock('../../../domains/boards/hooks/use-board-tasks');
+jest.mock('../../../domains/issues/hooks/use-update-issue-status');
 
 describe('BoardPage Integration', () => {
   const queryClient = new QueryClient();
